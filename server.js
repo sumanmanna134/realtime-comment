@@ -1,7 +1,18 @@
 const express = require('express');
 const app = express();
+
 const port = process.env.PORT || 3000;
 app.use(express.static('public'));
-app.listen(port, () => {
+const server = app.listen(port, () => {
   console.log(`listening on port ${port}`);
+});
+let io = require('socket.io')(server);
+io.on('connection', (socket) => {
+  console.log(`new connection ${socket.id}`);
+
+  //receive event
+  socket.on('comment', (data) => {
+    data.time = Date();
+    socket.broadcast.emit('comment', data);
+  });
 });

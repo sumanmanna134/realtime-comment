@@ -10,7 +10,7 @@
   </head>
   <body>
     <div class="container">
-      <div class="row">
+      <div class="row mt-4">
         <div class="col-md-12">
           <h4>
             <strong>
@@ -43,7 +43,48 @@
           </p>
         </div>
       </div>
+      <div class="row">
+        <div class="col-md-12">
+          <h4 class="border-bottom pb-2">Comments</h4>
+        </div>
+        <div class="col-md-12">
+          <div class="form-group">
+            <label for="">Write a Comment</label>
+            <textarea id="textarea" rows="3" class="form-control"></textarea>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <button class="btn btn-primary btn-lg mt-2 float-end" id="submitBtn">
+            Post Comment
+          </button>
+        </div>
+      </div>
+      <div class="row mt-2">
+        <div class="col-md-12">
+          <ul class="comment__box">
+            <!-- <li class="comment">
+              <div class="card border-light mb-3">
+                <div class="card-body">
+                  <h6>John Doe</h6>
+                  <p>This is nice post!</p>
+                  <div>
+                    <img src="./img/clock.png" alt="clock" />
+                    <small>11:30 AM</small>
+                  </div>
+                </div>
+              </div>
+            </li> -->
+          </ul>
+        </div>
+      </div>
     </div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.1/moment.min.js"
+      integrity="sha512-Dz4zO7p6MrF+VcOD6PUbA08hK1rv0hDv/wGuxSUjImaUYxRyK2gLC6eQWVqyDN9IM1X/kUA8zkykJS/gEVOd3w=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
     <script src="./js/app.js"></script>
   </body>
 </html>
