@@ -1,0 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Mulish:wght@200;500&display=swap');
+body {
+  background: whitesmoke;
+  -webkit-font-smoothing: antialiased;
+  font-family: 'Mulish', 'sans-serif';
+}
+p {
+  font-family: 'Mulish', 'sans-serif';
+}
