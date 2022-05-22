@@ -51,8 +51,8 @@ function appendToDom(data) {
   commentBox.prepend(lTag);
 }
 
+//broadcast comment using socket
 function broadcastComment(data) {
-  //Socket
   socket.emit('comment', data);
 }
 
