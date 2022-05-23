@@ -16,3 +16,17 @@ p {
 .comment__box .comment h6 {
   font-weight: 800;
 }
+
+.comment {
+  animation: something 0.6s ease forwards;
+}
+@keyframes something {
+  0% {
+    transform: translateX(-50px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0px);
+    opacity: 1;
+  }
+}

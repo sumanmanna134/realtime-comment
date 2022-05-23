@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: comment
+  template:
+    metadata:
+      labels:
+        app: comment
+    spec:
+      containers:
+        - name: comment
+          image: mannasuman134/realtime-comment
+          env:
+            - name: MONGO_URI
+              value: 'mongodb://app-mongo-srv:27017/comment'
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: comment-srv
+spec:
+  selector:
+    app: comment
+  ports:
+    - name: comment
+      protocol: TCP
+      port: 9700
+      targetPort: 9700

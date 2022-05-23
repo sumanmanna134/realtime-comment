@@ -25,9 +25,11 @@ function postComment(comment) {
     comment: comment,
   };
   appendToDom(data);
+  textarea.value = '';
   //BroadCast
   broadcastComment(data);
-  textarea.value = '';
+
+  syncWithDb(data);
 
   //sync with database
 }
@@ -59,3 +61,55 @@ function broadcastComment(data) {
 socket.on('comment', (data) => {
   appendToDom(data);
 });
+let typingDev = document.querySelector('.typing');
+let timerId = null;
+socket.on('typing', (data) => {
+  typingDev.innerText = `${data.username} is typing...`;
+  debounce(function () {
+    typingDev.innerText = '';
+  }, 1000);
+});
+
+function debounce(func, timer) {
+  if (timerId) {
+    clearTimeout(timerId);
+  }
+  timerId = setTimeout(() => {
+    func();
+  }, timer);
+}
+
+//Event Listener on textarea
+textarea.addEventListener('keyup', (e) => {
+  socket.emit('typing', { username });
+});
+
+//api calls
+
+function syncWithDb(data) {
+  const header = {
+    'Content-Type': 'application/json',
+  };
+  fetch('/api/comments', {
+    method: 'Post',
+    body: JSON.stringify(data),
+    headers: header,
+  })
+    .then((response) => response.json())
+    .then((result) => {
+      console.log(result);
+    });
+}
+
+function fetchComments() {
+  fetch('/api/comments')
+    .then((res) => res.json())
+    .then((result) => {
+      result.forEach((data) => {
+        data.time = data.createdAt;
+        appendToDom(data);
+      });
+    });
+}
+
+window.onload = fetchComments;
